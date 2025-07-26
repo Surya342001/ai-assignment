@@ -1,14 +1,24 @@
+# imdb_loader.py
+
+import kagglehub
+from kagglehub import KaggleDatasetAdapter
 import pandas as pd
-import os
 
 def load_imdb_data():
-    file_path = os.path.join(os.path.dirname(__file__), "movies.csv")  # or imdb_top_1000.csv
-    df = pd.read_csv(file_path)
+    file_path = "imdb_top_1000.csv"
 
-    # Combine fields into a single "text" column for embeddings
-    df["text"] = df.apply(
-        lambda row: f"{row['Series_Title']} - {row['Genre']} - {row['Overview']}",
-        axis=1
+    # Load dataset directly from KaggleHub
+    df = kagglehub.load_dataset(
+        KaggleDatasetAdapter.PANDAS,
+        "harshitshankhdhar/imdb-dataset-of-top-1000-movies-and-tv-shows",
+        file_path
     )
-    print("the loaded data",df)
+
+    # Combine important fields into a single "text" column for vector embeddings
+    df["text"] = df.apply(
+    lambda row: f"{row['Series_Title']} ({row['Released_Year']}) - Genre: {row['Genre']} - Rating: {row['IMDB_Rating']} - Overview: {row['Overview']} - Stars: {row['Star1']}, {row['Star2']}",
+    axis=1
+    )
+
+
     return df
