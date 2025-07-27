@@ -13,6 +13,19 @@
 
 🔹 Run this in your terminal (anywhere):
 
+# Create virtual environment
+python -m venv venv
+
+# Activate environment
+# macOS/Linux:
+source venv/bin/activate
+# Windows:
+venv\Scripts\activate
+
+
+
+     (or) like in my case 
+
 conda activate llm-imdb-py311
 
 ✅ Why: This ensures you're using Python 3.11 with all required packages for the backend.
