@@ -121,3 +121,6 @@ React → Frontend UI for user interaction.
 
 # "Underrated war movies"
 
+
+<img width="1420" height="784" alt="image" src="https://github.com/user-attachments/assets/f9756a30-8a3e-4afd-96b8-a60b0fd5b224" />
+
