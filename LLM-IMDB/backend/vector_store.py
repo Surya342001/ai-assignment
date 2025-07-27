@@ -25,3 +25,17 @@ def create_vector_store():
 def load_vector_store():
     embeddings = HuggingFaceEmbeddings(model_name="sentence-transformers/all-MiniLM-L6-v2")
     return Chroma(persist_directory=PERSIST_DIR, embedding_function=embeddings)
+
+
+# ✅ Run this file directly
+if __name__ == "__main__":
+    create_vector_store()
+
+    # Test loading
+    store = load_vector_store()
+    print("📦 Total documents in store:", store._collection.count())
+
+    results = store.similarity_search("romantic drama", k=3)
+    print("🔍 Sample results:")
+    for r in results:
+        print("-", r.metadata.get("title", "No title"))
